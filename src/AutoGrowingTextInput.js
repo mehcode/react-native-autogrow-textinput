@@ -58,9 +58,7 @@ export default class AutoGrowingTextInput extends Component {
    */
 
   _onChange(event) {
-    if(ANDROID_PLATFORM) {
-      this._handleNativeEvent(event.nativeEvent);
-    }
+    this._handleNativeEvent(event.nativeEvent);
 
     if (this.props.onChange) {
       this.props.onChange(event);
