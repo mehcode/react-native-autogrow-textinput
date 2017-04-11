@@ -7,7 +7,7 @@
 //
 
 #import "AutogrowTextInputManager.h"
-#import <React/RCTTextView.h>
+#import <RCTTextView.h>
 #import <objc/runtime.h>
 
 @interface RCTTextView(SetTextNotifyChange)
