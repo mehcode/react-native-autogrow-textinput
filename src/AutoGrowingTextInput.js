@@ -29,7 +29,6 @@ export default class AutoGrowingTextInput extends Component {
         multiline={true}
         {...this.props} {...this.style}
         style={[this.props.style, {height: this._getValidHeight(this.state.height)}]}
-        onContentSizeChange={(event) => this._onContentSizeChange(event)}
         onChange={(event) => this._onChange(event)}
         ref={(r) => { this._textInput = r; }}
       />
@@ -57,24 +56,10 @@ export default class AutoGrowingTextInput extends Component {
    of the updates are still performed via `onChange` as it was before
    using a flag (androidFirstContentSizeChange) to pervent multiple updates in case both notifications works simultaniously in some cases
    */
-  _onContentSizeChange(event) {
-    if(ANDROID_PLATFORM) {
-      if(!this.state.androidFirstContentSizeChange) {
-        return;
-      }
-      this.setState({androidFirstContentSizeChange: false});
-    }
-    this._handleNativeEvent(event.nativeEvent);
-
-    if (this.props.onContentSizeChange) {
-      this.props.onContentSizeChange(event);
-    }
-  }
 
   _onChange(event) {
-    if(ANDROID_PLATFORM && !this.state.androidFirstContentSizeChange) {
-      this._handleNativeEvent(event.nativeEvent);
-    }
+    this._handleNativeEvent(event.nativeEvent);
+
     if (this.props.onChange) {
       this.props.onChange(event);
     }
